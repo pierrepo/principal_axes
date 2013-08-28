@@ -3,14 +3,16 @@ Principal axes
 
 This program reads a .pdb file, computes principal axes and produces a .pml PyMoL script to view axes.
 
-Note that only C-alpha atoms are read and that the .pdb file must contain only a single 'coherent' structure.
+Note that only C-alpha atoms are read and that the .pdb file must only contain a single *coherent* protein structure.
 
 
-Example
-=======
+## Example
+
 with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin:
 
     ./principal_axes.py  1SJJ.pdb
+
+
 
     950 CA atomes found if 1SJJ.pdb
     Coordinates of the geometric center:
@@ -38,6 +40,8 @@ with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin:
     pymol 1SJJ_axes.pml 1SJJ.pdb
 
 
-![1SJJ](img/ISJJ.png "1SJJ")
+![1SJJ](img/1SJJ.png "1SJJ")
 
+## History
 
+The first version of the script has been posted in the Biostar forum as an answer to [Question: Protein 3D structure principal axes](http://www.biostars.org/p/7393/)
