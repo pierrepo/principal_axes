@@ -1,11 +1,10 @@
 #! /usr/bin/env python
 
-# author: Pierre Poulain
-# contributors: Justine Guegan, Edithe Selwa
-# last update: 20110414
-#
-# this Python script compute principal axes from a PDB file
-# it also produces a .pml script for a nice rendering with Pymol
+# Author: Pierre Poulain
+# Contributors: Justine Guegan, Edithe Selwa
+ 
+# This Python script computes principal axes from a PDB file
+# Itproduces a .pml script for a nice rendering with PyMOL
 
 #==========================================================================
 # import required modules
@@ -27,8 +26,8 @@ scale_factor = 20
 #==========================================================================
 def read_pdb_xyz(pdb_name):
     """
-read xyz from pdb 
-return:
+reads atomic coordinates of C-alpha atoms in a .pdb file
+returns:
 [[x1 y1 z1]
  [x2 y2 z2]
  [.. .. ..] 
@@ -77,7 +76,7 @@ coord = numpy.array(xyz, float)
 
 # compute geometric center
 center = numpy.mean(coord, 0)
-print "geometric center coordinates:\n", center
+print "Coordinates of the geometric center:\n", center
 
 # center with geometric center
 coord = coord - center
@@ -87,9 +86,9 @@ inertia = numpy.dot(coord.transpose(), coord)
 e_values, e_vectors = numpy.linalg.eig(inertia)
 # warning eigen values are not necessary ordered!
 # http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html
-print "(unordered) eigen values:"
+print "(Unordered) eigen values:"
 print e_values
-print "(unordered) eigen vectors:"
+print "(Unordered) eigen vectors:"
 print e_vectors
 
 #--------------------------------------------------------------------------
@@ -113,7 +112,7 @@ for i in xrange(len(e_values)):
 		eval2 = e_values[i]
 		axis2 = e_vectors[:,i]
 
-print "inertia axis are now ordered !"
+print "Inertia axis are now ordered !"
 
 #--------------------------------------------------------------------------
 # center axes to the geometric center of the molecule
@@ -129,7 +128,7 @@ point3 = 1 * scale_factor * axis3 + center
 #--------------------------------------------------------------------------
 # create .pml script for a nice rendering in Pymol
 #--------------------------------------------------------------------------
-pymol_name = pdb_name.replace(".pdb", "_axis.pml")
+pymol_name = pdb_name.replace(".pdb", "_axes.pml")
 pymol_file = open(pymol_name, "w")
 pymol_file.write(
 """from cgo import *
@@ -165,19 +164,19 @@ pymol_file.close()
 # create .pml script for nice rendering in Pymol
 # output usage
 #--------------------------------------------------------------------------
-print "the first principal axis is in red"
+print "The first principal axis is in red"
 print "coordinates: ", axis1
 print "eigen value: ", eval1
 print
-print "the second principal axis is in green"
+print "The second principal axis is in green"
 print "coordinates:", axis2
 print "eigen value:", eval2
 print
-print "the third principal axis is in blue"
+print "The third principal axis is in blue"
 print "coordinates:", axis3
 print "eigen value:", eval3
 print
-print "you can view principal axes with Pymol:"
+print "You can view principal axes with PyMOL:"
 print "pymol %s %s" %(pymol_name, pdb_name)
 
 
