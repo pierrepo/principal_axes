@@ -10,10 +10,11 @@ Note that only C-alpha atoms are read and that the .pdb file must only contain a
 
 with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin:
 
+```text
     ./principal_axes.py  1SJJ.pdb
+```
 
-
-
+```text
     950 CA atomes found if 1SJJ.pdb
     Coordinates of the geometric center:
     [-107.35616421  -44.75738526    8.11289053]
@@ -38,7 +39,7 @@ with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin:
 
     You can view principal axes with Pymol:
     pymol 1SJJ_axes.pml 1SJJ.pdb
-
+```
 
 ![1SJJ](img/1SJJ.png "1SJJ")
 
