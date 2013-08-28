@@ -8,7 +8,7 @@ Note that only C-alpha atoms are read and that the .pdb file must only contain a
 
 ## Example
 
-with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin:
+with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin ([1SJJ](http://dx.doi.org/10.2210/pdb1sjj/pdb) from the [Protein Data Bank](http://www.rcsb.org/pdb/home/home.do)):
 
 ```text
     ./principal_axes.py  1SJJ.pdb
@@ -45,4 +45,4 @@ with the cryo-EM structure of chicken gizzard smooth muscle alpha-actinin:
 
 ## History
 
-The first version of the script has been posted in the Biostar forum as an answer to [Question: Protein 3D structure principal axes](http://www.biostars.org/p/7393/)
+The first version of this script had been posted in the Biostar forum as an answer to [Question: Protein 3D structure principal axes](http://www.biostars.org/p/7393/)
