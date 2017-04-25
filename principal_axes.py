@@ -26,12 +26,12 @@ scale_factor = 20
 #==========================================================================
 def read_pdb_xyz(pdb_name):
     """
-reads atomic coordinates of C-alpha atoms in a .pdb file
-returns:
-[[x1 y1 z1]
-    [x2 y2 z2]
-    [.. .. ..]
-    [xn yn zn]]
+    reads atomic coordinates of C-alpha atoms in a .pdb file
+    returns:
+        [[x1 y1 z1]
+         [x2 y2 z2]
+         [.. .. ..]
+         [xn yn zn]]
     """
     xyz = []
     pdb_file = open(pdb_name, 'r')
@@ -55,8 +55,8 @@ if len(sys.argv) == 2:
     pdb_name = sys.argv[1]
 else:
     message = """
-ERROR: missing pdb filename as argument
-usage: %s file.pdb""" %(sys.argv[0])
+    ERROR: missing pdb filename as argument
+    usage: %s file.pdb""" %(sys.argv[0])
     sys.exit(message)
 
 # check if argument is an existing file
@@ -131,33 +131,34 @@ point3 = 1 * scale_factor * axis3 + center
 pymol_name = pdb_name.replace(".pdb", "_axes.pml")
 pymol_file = open(pymol_name, "w")
 pymol_file.write(
-"""from cgo import *
-axis1=  [ \
-BEGIN, LINES, \
-COLOR, 1.0, 0.0, 0.0, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \
-END ]
-axis2=  [ \
-BEGIN, LINES, \
-COLOR, 0.0, 1.0, 0.0, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \
-END ]
-axis3=  [ \
-BEGIN, LINES, \
-COLOR, 0.0, 0.0, 1.0, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \
-END ]
-cmd.load_cgo(axis1, 'axis1')
-cmd.load_cgo(axis2, 'axis2')
-cmd.load_cgo(axis3, 'axis3')
-cmd.set('cgo_line_width', 4)
-""" %( \
-center[0], center[1], center[2], point1[0], point1[1], point1[2], \
-center[0], center[1], center[2], point2[0], point2[1], point2[2], \
-center[0], center[1], center[2], point3[0], point3[1], point3[2]))
+    """
+    from cgo import *
+    axis1=  [ \
+    BEGIN, LINES, \
+    COLOR, 1.0, 0.0, 0.0, \
+    VERTEX, %8.3f, %8.3f, %8.3f, \
+    VERTEX, %8.3f, %8.3f, %8.3f, \
+    END ]
+    axis2=  [ \
+    BEGIN, LINES, \
+    COLOR, 0.0, 1.0, 0.0, \
+    VERTEX, %8.3f, %8.3f, %8.3f, \
+    VERTEX, %8.3f, %8.3f, %8.3f, \
+    END ]
+    axis3=  [ \
+    BEGIN, LINES, \
+    COLOR, 0.0, 0.0, 1.0, \
+    VERTEX, %8.3f, %8.3f, %8.3f, \
+    VERTEX, %8.3f, %8.3f, %8.3f, \
+    END ]
+    cmd.load_cgo(axis1, 'axis1')
+    cmd.load_cgo(axis2, 'axis2')
+    cmd.load_cgo(axis3, 'axis3')
+    cmd.set('cgo_line_width', 4)
+    """ %( \
+            center[0], center[1], center[2], point1[0], point1[1], point1[2], \
+            center[0], center[1], center[2], point2[0], point2[1], point2[2], \
+            center[0], center[1], center[2], point3[0], point3[1], point3[2]))
 pymol_file.close()
 
 #--------------------------------------------------------------------------
