@@ -163,7 +163,7 @@ with open(pymol_name, "w") as pymol_file:
 # create .pml script for nice rendering in Pymol
 # output usage
 #--------------------------------------------------------------------------
-print("The first principal axis is in red")
+print("\nThe first principal axis is in red")
 print("coordinates: ", axis1)
 print("eigen value: ", eval1)
 
@@ -171,9 +171,9 @@ print("\nThe second principal axis is in green")
 print("coordinates:", axis2)
 print("eigen value:", eval2)
 
-print("The third principal axis is in blue")
+print("\nThe third principal axis is in blue")
 print("coordinates:", axis3)
 print("eigen value:", eval3)
 
-print("You can view principal axes with PyMOL:")
+print("\nYou can view principal axes with PyMOL:")
 print("pymol %s %s" %(pymol_name, pdb_name))
