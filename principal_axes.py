@@ -34,16 +34,15 @@ def read_pdb_xyz(pdb_name):
          [xn yn zn]]
     """
     xyz = []
-    pdb_file = open(pdb_name, 'r')
-    for line in pdb_file:
-        if line.startswith("ATOM"):
-            # extract x, y, z coordinates for carbon alpha atoms
-            x = float(line[30:38].strip())
-            y = float(line[38:46].strip())
-            z = float(line[46:54].strip())
-            if line[12:16].strip() == "CA":
-                xyz.append([x, y, z])
-    pdb_file.close()
+    with open(pdb_name, 'r') as pdb_file:
+        for line in pdb_file:
+            if line.startswith("ATOM"):
+                # extract x, y, z coordinates for carbon alpha atoms
+                x = float(line[30:38].strip())
+                y = float(line[38:46].strip())
+                z = float(line[46:54].strip())
+                if line[12:16].strip() == "CA":
+                    xyz.append([x, y, z])
     return xyz
 
 #==========================================================================
@@ -129,37 +128,36 @@ point3 = 1 * scale_factor * axis3 + center
 # create .pml script for a nice rendering in Pymol
 #--------------------------------------------------------------------------
 pymol_name = pdb_name.replace(".pdb", "_axes.pml")
-pymol_file = open(pymol_name, "w")
-pymol_file.write(
-    """
-    from cgo import *
-    axis1=  [ \
-    BEGIN, LINES, \
-    COLOR, 1.0, 0.0, 0.0, \
-    VERTEX, %8.3f, %8.3f, %8.3f, \
-    VERTEX, %8.3f, %8.3f, %8.3f, \
-    END ]
-    axis2=  [ \
-    BEGIN, LINES, \
-    COLOR, 0.0, 1.0, 0.0, \
-    VERTEX, %8.3f, %8.3f, %8.3f, \
-    VERTEX, %8.3f, %8.3f, %8.3f, \
-    END ]
-    axis3=  [ \
-    BEGIN, LINES, \
-    COLOR, 0.0, 0.0, 1.0, \
-    VERTEX, %8.3f, %8.3f, %8.3f, \
-    VERTEX, %8.3f, %8.3f, %8.3f, \
-    END ]
-    cmd.load_cgo(axis1, 'axis1')
-    cmd.load_cgo(axis2, 'axis2')
-    cmd.load_cgo(axis3, 'axis3')
-    cmd.set('cgo_line_width', 4)
-    """ %( \
-            center[0], center[1], center[2], point1[0], point1[1], point1[2], \
-            center[0], center[1], center[2], point2[0], point2[1], point2[2], \
-            center[0], center[1], center[2], point3[0], point3[1], point3[2]))
-pymol_file.close()
+with open(pymol_name, "w") as pymol_file:
+    pymol_file.write(
+        """
+        from cgo import *
+        axis1=  [ \
+        BEGIN, LINES, \
+        COLOR, 1.0, 0.0, 0.0, \
+        VERTEX, %8.3f, %8.3f, %8.3f, \
+        VERTEX, %8.3f, %8.3f, %8.3f, \
+        END ]
+        axis2=  [ \
+        BEGIN, LINES, \
+        COLOR, 0.0, 1.0, 0.0, \
+        VERTEX, %8.3f, %8.3f, %8.3f, \
+        VERTEX, %8.3f, %8.3f, %8.3f, \
+        END ]
+        axis3=  [ \
+        BEGIN, LINES, \
+        COLOR, 0.0, 0.0, 1.0, \
+        VERTEX, %8.3f, %8.3f, %8.3f, \
+        VERTEX, %8.3f, %8.3f, %8.3f, \
+        END ]
+        cmd.load_cgo(axis1, 'axis1')
+        cmd.load_cgo(axis2, 'axis2')
+        cmd.load_cgo(axis3, 'axis3')
+        cmd.set('cgo_line_width', 4)
+        """ %( \
+                center[0], center[1], center[2], point1[0], point1[1], point1[2], \
+                center[0], center[1], center[2], point2[0], point2[1], point2[2], \
+                center[0], center[1], center[2], point3[0], point3[1], point3[2]))
 
 #--------------------------------------------------------------------------
 # create .pml script for nice rendering in Pymol
