@@ -99,22 +99,8 @@ print(e_vectors)
 #--------------------------------------------------------------------------
 order = numpy.argsort(e_values)
 eval3, eval2, eval1 = e_values[order]
-axis3, axis2, axis1 = e_vectors[order, :]
-'''
-for i in range(len(e_values)):
-    # find biggest eigen value
-    if e_values[i] == max(e_values):
-        eval1 = e_values[i]
-        axis1 = e_vectors[:,i]
-    # find smallest eigen value
-    elif e_values[i] == min(e_values):
-        eval3 = e_values[i]
-        axis3 = e_vectors[:,i]
-    # middle eigen value
-    else:
-        eval2 = e_values[i]
-        axis2 = e_vectors[:,i]
-'''
+axis3, axis2, axis1 = e_vectors[:, order].transpose()
+
 print("Inertia axis are now ordered !")
 
 #--------------------------------------------------------------------------
