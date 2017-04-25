@@ -69,14 +69,14 @@ if not os.path.exists(pdb_name):
 #--------------------------------------------------------------------------
 # read pdb
 xyz = read_pdb_xyz(pdb_name)
-print "%d CA atomes found if %s" %(len(xyz), pdb_name)
+print("%d CA atomes found if %s" %(len(xyz), pdb_name))
 
 #create coordinates array
 coord = numpy.array(xyz, float)
 
 # compute geometric center
 center = numpy.mean(coord, 0)
-print "Coordinates of the geometric center:\n", center
+print("Coordinates of the geometric center:\n", center)
 
 # center with geometric center
 coord = coord - center
@@ -86,10 +86,10 @@ inertia = numpy.dot(coord.transpose(), coord)
 e_values, e_vectors = numpy.linalg.eig(inertia)
 # warning eigen values are not necessary ordered!
 # http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html
-print "(Unordered) eigen values:"
-print e_values
-print "(Unordered) eigen vectors:"
-print e_vectors
+print("(Unordered) eigen values:")
+print(e_values)
+print("(Unordered) eigen vectors:")
+print(e_vectors)
 
 #--------------------------------------------------------------------------
 # order eigen values (and eigen vectors)
@@ -112,7 +112,7 @@ for i in xrange(len(e_values)):
         eval2 = e_values[i]
         axis2 = e_vectors[:,i]
 
-print "Inertia axis are now ordered !"
+print("Inertia axis are now ordered !")
 
 #--------------------------------------------------------------------------
 # center axes to the geometric center of the molecule
@@ -165,19 +165,17 @@ pymol_file.close()
 # create .pml script for nice rendering in Pymol
 # output usage
 #--------------------------------------------------------------------------
-print "The first principal axis is in red"
-print "coordinates: ", axis1
-print "eigen value: ", eval1
-print
-print "The second principal axis is in green"
-print "coordinates:", axis2
-print "eigen value:", eval2
-print
-print "The third principal axis is in blue"
-print "coordinates:", axis3
-print "eigen value:", eval3
-print
-print "You can view principal axes with PyMOL:"
-print "pymol %s %s" %(pymol_name, pdb_name)
+print("The first principal axis is in red")
+print("coordinates: ", axis1)
+print("eigen value: ", eval1)
 
+print("\nThe second principal axis is in green")
+print("coordinates:", axis2)
+print("eigen value:", eval2)
 
+print("The third principal axis is in blue")
+print("coordinates:", axis3)
+print("eigen value:", eval3)
+
+print("You can view principal axes with PyMOL:")
+print("pymol %s %s" %(pymol_name, pdb_name))
