@@ -98,7 +98,7 @@ print(e_vectors)
 # axis2 is the principal axis with the second biggest eigen value (eval2)
 # axis3 is the principal axis with the smallest eigen value (eval3)
 #--------------------------------------------------------------------------
-for i in xrange(len(e_values)):
+for i in range(len(e_values)):
     # find biggest eigen value
     if e_values[i] == max(e_values):
         eval1 = e_values[i]
