@@ -2,7 +2,7 @@
 
 # Author: Pierre Poulain
 # Contributors: Justine Guegan, Edithe Selwa
- 
+
 # This Python script computes principal axes from a PDB file
 # Itproduces a .pml script for a nice rendering with PyMOL
 
@@ -29,9 +29,9 @@ def read_pdb_xyz(pdb_name):
 reads atomic coordinates of C-alpha atoms in a .pdb file
 returns:
 [[x1 y1 z1]
- [x2 y2 z2]
- [.. .. ..] 
- [xn yn zn]]
+    [x2 y2 z2]
+    [.. .. ..]
+    [xn yn zn]]
     """
     xyz = []
     pdb_file = open(pdb_name, 'r')
@@ -42,7 +42,7 @@ returns:
             y = float(line[38:46].strip())
             z = float(line[46:54].strip())
             if line[12:16].strip() == "CA":
-				xyz.append([x, y, z])
+                xyz.append([x, y, z])
     pdb_file.close()
     return xyz
 
@@ -52,7 +52,7 @@ returns:
 
 # check if argument is there
 if len(sys.argv) == 2:
-	pdb_name = sys.argv[1]
+    pdb_name = sys.argv[1]
 else:
     message = """
 ERROR: missing pdb filename as argument
@@ -99,18 +99,18 @@ print e_vectors
 # axis3 is the principal axis with the smallest eigen value (eval3)
 #--------------------------------------------------------------------------
 for i in xrange(len(e_values)):
-	# find biggest eigen value
-	if e_values[i] == max(e_values):
-		eval1 = e_values[i]
-		axis1 = e_vectors[:,i]
-	# find smallest eigen value
-	elif e_values[i] == min(e_values):
-		eval3 = e_values[i]
-		axis3 = e_vectors[:,i]
-	# middle eigen value
-	else:
-		eval2 = e_values[i]
-		axis2 = e_vectors[:,i]
+    # find biggest eigen value
+    if e_values[i] == max(e_values):
+        eval1 = e_values[i]
+        axis1 = e_vectors[:,i]
+    # find smallest eigen value
+    elif e_values[i] == min(e_values):
+        eval3 = e_values[i]
+        axis3 = e_vectors[:,i]
+    # middle eigen value
+    else:
+        eval2 = e_values[i]
+        axis2 = e_vectors[:,i]
 
 print "Inertia axis are now ordered !"
 
@@ -142,13 +142,13 @@ axis2=  [ \
 BEGIN, LINES, \
 COLOR, 0.0, 1.0, 0.0, \
   VERTEX, %8.3f, %8.3f, %8.3f, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \ 
+  VERTEX, %8.3f, %8.3f, %8.3f, \
 END ]
 axis3=  [ \
 BEGIN, LINES, \
 COLOR, 0.0, 0.0, 1.0, \
   VERTEX, %8.3f, %8.3f, %8.3f, \
-  VERTEX, %8.3f, %8.3f, %8.3f, \ 
+  VERTEX, %8.3f, %8.3f, %8.3f, \
 END ]
 cmd.load_cgo(axis1, 'axis1')
 cmd.load_cgo(axis2, 'axis2')
