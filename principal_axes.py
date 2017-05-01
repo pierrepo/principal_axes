@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 # Author: Pierre Poulain
-# Contributors: Justine Guegan, Edithe Selwa
+# Contributors: Justine Guegan, Edithe Selwa, Steven C. Howell
 
 # This Python script computes principal axes from a PDB file
 # Itproduces a .pml script for a nice rendering with PyMOL
