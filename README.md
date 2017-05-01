@@ -46,6 +46,6 @@ pymol 1SJJ_axes.pml 1SJJ.pdb
 
 ## History
 
-2017: thanks to @StevenCHowell, the code is not Python 3 ready.
+2017: thanks to @StevenCHowell, the code is now Python 3 ready.
 
 2013: The first version of this script had been posted in the Biostar forum as an answer to [Question: Protein 3D structure principal axes](http://www.biostars.org/p/7393/)
