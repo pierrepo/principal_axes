@@ -143,7 +143,7 @@ if __name__ == '__main__':
     with open(pymol_name, "w") as pymol_file:
         pymol_file.write(
             """
-            from cgo import *
+            from pymol.cgo import *
             axis1=  [ BEGIN, LINES, COLOR, 1.0, 0.0, 0.0, \
             VERTEX, %8.3f, %8.3f, %8.3f, VERTEX, %8.3f, %8.3f, %8.3f, END ]
             axis2=  [ BEGIN, LINES, COLOR, 0.0, 1.0, 0.0, \
